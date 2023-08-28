@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 ''' Module 5-sum_list '''
+from typing import List
 
-def sum_list(list_of_numbers: list) -> float:
+
+def sum_list(input_list: List[float]) -> float:
     ''' Function 5-sum_list '''
-    return sum(list_of_numbers)
+    return sum(input_list)
