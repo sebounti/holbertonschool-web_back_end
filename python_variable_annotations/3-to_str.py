@@ -3,6 +3,6 @@
 import math
 
 
-def to_str (n: float) -> str:
+def to_str(n: float) -> str:
     ''' Function 3-to_str '''
     return str(n)
