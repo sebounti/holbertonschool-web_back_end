@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+
 '''function that changes all topics of a school document based on the name'''
 
 
