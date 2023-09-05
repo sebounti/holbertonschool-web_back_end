@@ -36,7 +36,6 @@ class Server:
         assert type(page_size) == int
         assert page > 0 and page_size > 0
 
-
         start_index, end_index = index_range(page, page_size)
         return self.dataset()[start_index:end_index]
 
@@ -52,11 +51,11 @@ class Server:
 
         hyper_dict = {
             'page_size': len(data),
-            'page' : page,
-            'data' : data,
-            'next_page' : next_page,
-            'prev_page' : prev_page,
-            'total_pages' : total_pages
+            'page': page,
+            'data': data,
+            'next_page': next_page,
+            'prev_page': prev_page,
+            'total_pages': total_pages
         }
 
         return hyper_dict
