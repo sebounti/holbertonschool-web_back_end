@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 '''Module 1 - simple_pagination'''
-from typing import List,Tuple
+from typing import List, Tuple
 import math
 import csv
 
