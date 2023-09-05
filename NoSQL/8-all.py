@@ -1,5 +1,5 @@
-#!/usr/bin/python3
-'''lists all documents in a collection'''
+#!/usr/bin/env python3
+"""lists all documents in a collection"""
 
 import pymongo
 
