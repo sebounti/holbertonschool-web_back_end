@@ -19,5 +19,5 @@ specific_criteria_count = collection.count_documents({"method": "GET", "path": "
 print(f"{total_logs} logs")
 print("Methods:")
 for method in methods:
-    print(f"   method {method}: {method_counts[method]}")
+    print(f"\tmethod {method}: {method_counts[method]}")
 print(f"{specific_criteria_count} status check")
