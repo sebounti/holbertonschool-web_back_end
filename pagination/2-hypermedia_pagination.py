@@ -43,7 +43,7 @@ class Server:
         ''' function Hypermedia_pagination '''
         data = self.get_page(page, page_size)
 
-        total_pages = math.ceil(len(data) / page_size)
+        total_pages = math.ceil(len(self.dataset()) / page_size)
 
         next_page = page + 1 if page < total_pages else None
 
