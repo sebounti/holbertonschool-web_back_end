@@ -44,35 +44,23 @@ class Server:
         return self.__indexed_dataset
 
     def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict:
-        """
-        Obtenir une page de données avec index
-        hypermédia résiliente à la suppression
-        """
+        assert index is None or 0 <= index < len(self.indexed_dataset())
+        assert type(page_size) == int and page_size > 0
 
-        data = self.dataset()
-        # Obtenir les données réelles
+        current_index = index if index is not None else 0
+        next_index = current_index + page_size
 
-        # Vérifier si l'index fourni est valide
-        assert index is None or (index >= 0 and index < len(data))
+        indexed_data = self.indexed_dataset()
+        data = []
 
-        if index is None:
-            # Si l'index est None, le définir sur 0 (début depuis le début)
-            index = 0
-        else:
-            # Si un index est fourni, l'ajuster pour le début de la nexte page
-            index = (index // page_size) * page_size + page_size
+        i = current_index
+        while i < next_index and i < len(indexed_data):
+            data.append(indexed_data.get(i, []))
+            i += 1
 
-        next_index = index + page_size
-        # Calculer l'index suivant à interroger
-
-        data = self.dataset()[index:next_index]
-        # Obtenir la page réelle de données
-
-        hyper_dict = {
-            'index': index,
-            'next_index': next_index,
-            'page_size': page_size,
-            'data': data
+        return {
+            "index": current_index,
+            "data": data,
+            "page_size": page_size,
+            "next_index": next_index
         }
-
-        return hyper_dict
