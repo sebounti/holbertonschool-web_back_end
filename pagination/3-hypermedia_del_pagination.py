@@ -44,6 +44,9 @@ class Server:
         return self.__indexed_dataset
 
     def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict:
+        ''' function get index with two integer arguments:
+        index = None default value
+        page_size = 10. '''
         total_items = len(self.indexed_dataset())
 
         if index is not None and index not in self.indexed_dataset():
