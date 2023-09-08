@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """script that provides some stats about Nginx logs stored in MongoDB """
 
-import pymongo
+from pymongo import MongoClient
 
 if __name__ == "__main__":
 
-    client = pymongo.MongoClient("mongodb://localhost:27017/")
+    client = MongoClient("mongodb://localhost:27017/")
     db = client["logs"]
     collection = db["nginx"]
 
