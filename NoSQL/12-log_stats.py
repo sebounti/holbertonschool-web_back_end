@@ -3,8 +3,7 @@
 
 import pymongo
 
-def log_stats():
-    '''function that provides some stats about Nginx logs stored in MongoDB'''
+if __name__ == "__main__":
 
     client = pymongo.MongoClient("mongodb://localhost:27017/")
     db = client["logs"]
@@ -19,12 +18,10 @@ def log_stats():
     specific_criteria_count = collection.count_documents({"method": "GET", "path":
                                                                     "/status"})
 
-
     print(f"{total_logs} logs")
     print("Methods:")
     for method in methods:
         print(f"\tmethod {method}: {method_counts[method]}")
     print(f"{specific_criteria_count} status check")
 
-    if __name__ == "__main__":
-        log_stats()
+client.close()
