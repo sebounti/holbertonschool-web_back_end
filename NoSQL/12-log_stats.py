@@ -11,9 +11,11 @@ collection = db["nginx"]
 total_logs = collection.count_documents({})
 
 methods = ["GET", "POST", "PUT", "PATCH", "DELETE"]
-method_counts = {method: collection.count_documents({"method": method}) for method in methods}
+method_counts = {method: collection.count_documents({"method": method
+                                                     }) for method in methods}
 
-specific_criteria_count = collection.count_documents({"method": "GET", "path": "/status"})
+specific_criteria_count = collection.count_documents({"method": "GET", "path":
+                                                                "/status"})
 
 
 print(f"{total_logs} logs")
