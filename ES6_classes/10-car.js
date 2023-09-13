@@ -9,6 +9,7 @@ class Car {
   }
 
 cloneCar() {
+  /* Clone this car */
   return new this.constructor(this._brand, this._motor, this._color);
   }
 }
