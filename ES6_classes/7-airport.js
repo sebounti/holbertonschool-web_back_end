@@ -14,6 +14,7 @@ class Airport {
     this._name = newName;
   }
 
+
   get code() {
     return this._code;
   }
@@ -22,8 +23,9 @@ class Airport {
     this._code = newCode;
   }
 
+
   toString() {
-    return `(${this._code})`;
+    return `[object ${this._code}]`;
   }
 }
 
