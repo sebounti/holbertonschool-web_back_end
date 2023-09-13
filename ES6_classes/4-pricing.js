@@ -1,5 +1,7 @@
-/*  4-pricing.js */
-import currency from './3-currency.js';
+#!/usr/bin/env node
+
+import Currency from './3-currency.js';
+
 
 class Pricing {
   constructor(amount, currency) {
@@ -12,6 +14,7 @@ class Pricing {
 
   set amount(newAmount) {
     this._amount = newAmount;
+
   }
   get currency() {
     return this._currency;
@@ -26,8 +29,8 @@ class Pricing {
     return `${amount} ${currency.name} (${currency.code})`;
   }
 
-  static convertPrice(amount, conversionrate) {
-    return amount * conversionrate;
+  static convertPrice(amount, conversionRate) {
+    return amount * conversionRate;
   }
 }
 
