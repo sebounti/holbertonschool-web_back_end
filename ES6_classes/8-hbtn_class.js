@@ -22,7 +22,6 @@ class HolbertonCourse {
     this._location = newLocation;
   }
 
-
   [Symbol.toPrimitive](hint) {
     if (hint === 'number') {
       return this._size;
