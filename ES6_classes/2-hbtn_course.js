@@ -1,10 +1,12 @@
 class HolbertonCourse {
-  constructor(name, lenght, student) {
+// constructor(name, lenght, student)
+  constructor(name, length, student) {
     this._name = name;
-    this._lenght = lenght;
+    this._length = length;
     this._student = student;
   }
 
+  // getter and setter name
   get name() {
     return this._name;
   }
@@ -16,25 +18,27 @@ class HolbertonCourse {
     this._name = value;
   }
 
-  get lenght() {
-    return this._lenght;
+  // getter and setter lenght
+  get length() {
+    return this._length;
   }
 
-  set lenght(value) {
+  set length(value) {
     if (typeof value !== 'number') {
       throw new TypeError('Lenght must be a number');
     }
-    this._lenght = value;
+    this._length = value;
   }
 
+  // getter and setter student
   get student() {
     return this._student;
   }
 
-  set student(value) {
-    if (typeof value !== 'object') {
+  set student(studentvalue) {
+    if (typeof studentvalue !== 'object') {
       throw new TypeError('Student must be an object');
     }
-    this._student = value;
+    this._student = studentvalue;
   }
 }
