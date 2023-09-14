@@ -1,6 +1,4 @@
-#!/usr/bin/env node
-
-import Currency from './3-currency.js';
+import Currency from './3-currency';
 
 class Pricing {
   constructor(amount, currency) {
@@ -15,7 +13,6 @@ class Pricing {
 
   set amount(newAmount) {
     this._amount = newAmount;
-
   }
 
   // getter and setter from currency
