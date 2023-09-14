@@ -1,4 +1,4 @@
-  /* 8-hbtn_class.js */
+/* 8-hbtn_class.js */
 
 class HolbertonCourse {
   constructor(size, location) {
@@ -25,11 +25,11 @@ class HolbertonCourse {
   [Symbol.toPrimitive](hint) {
     if (hint === 'number') {
       return this._size;
-    } else if (hint === 'string') {
-      return this._location
+    }  if (hint === 'string') {
+      return this._location;
     }
-    return this ;
-    }
+    return this;
   }
+}
 
-export default HolbertonCourse
+export default HolbertonCourse;
