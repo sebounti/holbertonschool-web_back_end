@@ -1,5 +1,5 @@
-/* 1-make_classrooms.js */
-import ClassRoom from './0-classroom.js';
+/* 1-make_classrooms */
+import ClassRoom from './0-classroom';
 
 function initializeRooms() {
   /* Créez un array d'objets ClassRoom avec les size spécifiées */
