@@ -8,9 +8,9 @@ class Car {
     this._color = color;
   }
 
-cloneCar() {
+  cloneCar() {
   /* Clone this car */
-  return new this.constructor(this._brand, this._motor, this._color);
+    return new this.constructor(this._brand, this._motor, this._color);
   }
 }
 
