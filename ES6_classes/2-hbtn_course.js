@@ -1,4 +1,4 @@
-class HolbertonCourse {
+export default class HolbertonCourse {
 // constructor(name, lenght, student)
   constructor(name, length, student) {
     this._name = name;
@@ -36,7 +36,7 @@ class HolbertonCourse {
   }
 
   set student(studentvalue) {
-    if (typeof studentvalue !== 'object') {
+    if (!value.every((student) => typeof student === 'string')) {
       throw new TypeError('Student must be an object');
     }
     this._student = studentvalue;
