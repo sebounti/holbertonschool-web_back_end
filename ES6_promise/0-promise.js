@@ -3,9 +3,9 @@ export default function getResponseFromAPI() {
   return new Promise((resolve, reject) => {
     const condition = true;
     if (condition) {
-      resolve(`true`);
+      resolve('true');
     } else {
-      reject(new Error("false error message"));
+      reject(new Error('false error message'));
     }
   });
 }
