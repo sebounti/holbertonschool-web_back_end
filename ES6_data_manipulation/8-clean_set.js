@@ -1,9 +1,17 @@
-export default function cleanset(set, startstring) {
-  const result = [];
+export default function cleanset(set, startString) {
+  const str = [];
+  if (
+    typeof set !== 'object'
+    || typeof startString !== 'string'
+    || startString.length === 0
+  ) {
+    return '';
+  }
+
   for (const item of set) {
-    if (item.startsWith(startstring)) {
-      result.push(item.slice(startstring.length));
+    if (item && item.startsWith(startString)) {
+      str.push(item.slice(startString.length));
     }
   }
-  return result.join('-');
+  return str.join('-');
 }
