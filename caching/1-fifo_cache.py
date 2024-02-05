@@ -2,6 +2,7 @@
 ''' FIFO cache '''
 from base_caching import BaseCaching
 
+
 class FIFOCache(BaseCaching):
     ''' FIFO cache inherits from BaseCaching '''
     def __init__(self):
