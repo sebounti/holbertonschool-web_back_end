@@ -2,6 +2,7 @@
 ''' MRUCache class '''
 from base_caching import BaseCaching
 
+
 class MRUCache(BaseCaching):
     ''' MRUCache class inherits from BaseCaching '''
     def __init__(self):
@@ -19,7 +20,7 @@ class MRUCache(BaseCaching):
             elif len(self.cache_data) >= BaseCaching.MAX_ITEMS:
                 mru_keys = self.keys.pop()
                 del self.cache_data[mru_keys]
-                print(f"DISCARD:",[mru_keys])
+                print(f"DISCARD:", mru_keys)
             self.cache_data[key] = item
             self.keys.append(key)
 
