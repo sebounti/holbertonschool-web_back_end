@@ -1,6 +1,7 @@
 #!/usr/bin/python3
-from base_caching import BaseCaching
 ''' LIFOCache class '''
+from base_caching import BaseCaching
+
 
 class LIFOCache(BaseCaching):
     ''' LIFOCache class inherits from BaseCaching '''
