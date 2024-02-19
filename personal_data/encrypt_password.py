@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
+''' Task 5 - Encrypting passwords'''
 
 import bcrypt
 
-''' Task 5 - Encrypting passwords'''
 
 
 def hash_password(password: str = '') -> bytes:
