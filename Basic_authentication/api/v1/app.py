@@ -26,7 +26,7 @@ def unauthorized():
     """ Unauthorized handler
     """
     # Générer la réponse JSON avec le message d'erreur approprié
-    response = jsonify({'error': 'Unauthorized'})
+    response = jsonify({"error": "Unauthorized"})
     # Définir le type de contenu correct
     response.headers['Content-Type'] = 'application/json'
     # Définir le code d'état HTTP pour "Unauthorized"
