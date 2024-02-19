@@ -23,6 +23,8 @@ def not_found(error) -> str:
 
 @app.route('/api/v1/unauthorized')
 def unauthorized():
+    """ Unauthorized handler
+    """
     # Générer la réponse JSON avec le message d'erreur approprié
     response = jsonify({'error': 'Unauthorized'})
     # Définir le type de contenu correct
