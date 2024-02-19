@@ -23,6 +23,7 @@ def not_found(error) -> str:
 
 @app.errorhandler(401)
 def unauthorized(error) -> str:
+    ''' error handler'''
     response = jsonify({'message': 'Unauthorized'})
     response.headers['Content-Type'] = 'application/json'
     return response
