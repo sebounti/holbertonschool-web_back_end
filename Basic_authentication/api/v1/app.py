@@ -21,12 +21,14 @@ def not_found(error) -> str:
     return jsonify({"error": "Not found"}), 404
 
 
-@app.errorhandler(401)
-def unauthorized(error) -> str:
-    ''' error handler'''
-    response = jsonify({'message': 'Unauthorized'})
-    response.headers['Content-Type'] = 'application/json'
-    return response
+@app_views.route('/unauthorized', methods=['GET'], strict_slashes=False)
+def test_unathourized() -> str:
+    """ GET /api/v1/unauthorized
+    Return:
+      - Raise error
+    """
+    return abort(401)
+
 
 if __name__ == "__main__":
     host = getenv("API_HOST", "0.0.0.0")
