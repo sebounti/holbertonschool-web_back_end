@@ -22,7 +22,6 @@ if auth_type:
         auth = Auth()
 
 
-
 @app.errorhandler(404)
 def not_found(error) -> str:
     """ Not found handler
