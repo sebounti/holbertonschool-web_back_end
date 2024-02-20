@@ -21,7 +21,7 @@ if auth_type:
 
 
 @app.errorhandler(404)
-def not_found(error)-> str:
+def not_found(error) -> str:
     """ Not found handler """
     return jsonify({"error": "Not found"}), 404
 
@@ -33,7 +33,7 @@ def Unauthorized(error) -> str:
 
 
 @app.errorhandler(403)
-def Forbidden(error)-> str:
+def Forbidden(error) -> str:
     """ Forbidden Handler """
     return jsonify({"error": "Forbidden"}), 403
 
