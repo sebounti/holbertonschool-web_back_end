@@ -26,10 +26,10 @@ def stats() -> str:
     return jsonify(stats)
 
 
-@app_views.route('/unauthorized', methods=['GET'], strict_slashes=False)
-def test_unathourized() -> str:
-    """ GET /api/v1/unauthorized
+@app_views.route('/unauthorized', strict_slashes=False)
+def unauthorized() -> str:
+    """ Get /api/v1/unauthorized
     Return:
-      - Raise error
+    - Unauthorized message
     """
     return abort(401)
