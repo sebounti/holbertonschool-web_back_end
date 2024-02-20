@@ -15,10 +15,9 @@ CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 auth = None
 auth_type = getenv("AUTH_TYPE")
 if auth:
-    from api.v1.auth.auth import Auth  # Importez la classe d'authentification
-    auth = Auth()  # Créez une instance de la classe d'authentification et assignez-la à la variable auth
-
-
+    # Importez la classe d'authentification
+    from api.v1.auth.auth import Auth
+    auth = Auth()
 
 
 @app.errorhandler(404)
@@ -30,14 +29,16 @@ def not_found(error) -> str:
 
 @app.errorhandler(401)
 def Unauthorized(error) -> str:
-    """ Unauthorized handler
+    """
+    Unauthorized handler
     """
     return jsonify({"error": "Unauthorized"}), 401
 
 
 @app.errorhandler(403)
 def Forbidden(error) -> str:
-    """Forbidden Handler
+    """
+    Forbidden Handler
     """
     return jsonify({"error": "Forbidden"}), 403
 
