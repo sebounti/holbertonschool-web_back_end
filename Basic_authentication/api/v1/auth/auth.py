@@ -13,15 +13,19 @@ class Auth:
         '''
             Define which routes don't need authentication
         '''
-        if excluded_paths is None or excluded_paths == []:
+        if path is None:
             return True
+
+        if excluded_paths is None or not excluded_paths:
+            return True
+
+        if path in excluded_paths:
+            return False
+
         for ex_path in excluded_paths:
-            if ex_path == path:
+            if ex_path.endswith('/') and path.startswith(ex_path):
                 return False
-            if ex_path.endswith('*'):
-                pfx_path = ex_path[:-1]
-                if pfx_path in path:
-                    return False
+
         return True
 
     def authorization_header(self, request=None) -> str:
