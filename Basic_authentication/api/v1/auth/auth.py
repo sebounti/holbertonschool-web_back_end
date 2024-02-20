@@ -20,8 +20,8 @@ class Auth:
                 return False
             if ex_path.endswith('*'):
                 pfx_path = ex_path[:-1]
-            if pfx_path in path:
-                return False
+                if pfx_path in path:
+                    return False
 
     def authorization_header(self, request=None) -> str:
         """
