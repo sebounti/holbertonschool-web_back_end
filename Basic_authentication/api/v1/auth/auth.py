@@ -10,10 +10,10 @@ class Auth:
     Auth class
     """
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
-        """
+        '''
             Define which routes don't need authentication
-        """
-        if path is None or ex_path is None or len(ex_path) == 0:
+        '''
+        if excluded_paths is None or excluded_paths == []:
             return True
         for ex_path in excluded_paths:
             if ex_path == path:
@@ -22,6 +22,7 @@ class Auth:
                 pfx_path = ex_path[:-1]
                 if pfx_path in path:
                     return False
+        return True
 
     def authorization_header(self, request=None) -> str:
         """
