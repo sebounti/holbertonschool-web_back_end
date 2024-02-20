@@ -21,18 +21,11 @@ def not_found(error) -> str:
     return jsonify({"error": "Not found"}), 404
 
 
-@app.route('/api/v1/unauthorized')
-def unauthorized():
+@app.errorhandler(401)
+def Unauthorized(error) -> str:
     """ Unauthorized handler
     """
-    # Générer la réponse JSON avec le message d'erreur approprié
-    response = jsonify({"error": "Unauthorized"})
-    # Définir le type de contenu correct
-    response.headers['Content-Type'] = 'application/json'
-    # Définir le code d'état HTTP pour "Unauthorized"
-    response.status_code = 401
-    # Renvoyer la réponse
-    return response
+    return jsonify({"error": "Unauthorized"}), 401
 
 
 if __name__ == "__main__":
