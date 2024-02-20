@@ -8,6 +8,7 @@ from flask import Flask, jsonify, request
 from flask_cors import (CORS, cross_origin)
 import os
 from flask import abort
+from api.v1.auth.auth import Auth
 
 
 app = Flask(__name__)
