@@ -6,9 +6,16 @@ from typing import List, TypeVar
 
 
 class Auth:
-    """
-    Auth class
-    """
+    """ Auth Class """
+
+    def __init__(self):
+        """
+            Constructor
+
+            Args:
+                path: path to authenticate
+                excluded_paths: list of excluded path to authenticate
+        """
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         '''
             Define which routes don't need authentication
@@ -31,9 +38,8 @@ class Auth:
         """
         if request is None:
             return None
-        if "Authorization" not in request.headers:
-            return None
-        return request.headers["Authorization"]
+
+        return request.headers.get('Authorization', None)
 
     def current_user(self, request=None) -> TypeVar('User'):
         """
