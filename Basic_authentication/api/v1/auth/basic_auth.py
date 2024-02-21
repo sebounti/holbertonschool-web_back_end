@@ -78,21 +78,17 @@ class BasicAuth(Auth):
             User object from credentials
             """
 
-            if user_email is None or not user_email:
+            if user_email is None or not isinstance(user_email, str):
                 return None
 
-            if user_pwd is None or not user_pwd:
+            if user_pwd is None or not isinstance(user_pwd, str):
                 return None
 
             try:
-                user = self._db.find_user_by(email=user_email)
-            except BaseException:
+                found_users = User.search({'email': user_email})
+            except Exception:
                 return None
 
-            if user is None:
-                return None
-
-            if not user.is_valid_password(user_pwd):
-                return None
-
-            return user
+            for user in found_users:
+                if user.is_valid_password(user_pwd):
+                    return user
