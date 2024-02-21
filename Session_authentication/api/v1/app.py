@@ -38,11 +38,11 @@ def handle_before_request():
     if (auth.authorization_header(request)) is None:
         abort(401)
 
-    current_user = auth.current_user(request)
-    if current_user is None:
+    if auth.current_user(request) is None:
         abort(403)
-    else:
-        request.current_user = current_user
+
+    request.current_user = auth.current_user(request)
+
 
 @app.errorhandler(404)
 def not_found(error) -> str:
@@ -69,5 +69,5 @@ def forbidden(error) -> str:
 
 if __name__ == "__main__":
     host = getenv("API_HOST", "0.0.0.0")
-    port = getenv("API_PORT", "5000")
+    port = getenv("API_PORT", "5001")
     app.run(host=host, port=port)
