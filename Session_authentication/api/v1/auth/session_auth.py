@@ -3,12 +3,10 @@
 Module of Index views
 """
 
-from api.v1.views import app_views
 from flask import abort, jsonify, request
 from models.user import User
 from api.v1.auth.auth import Auth
 import uuid
-
 
 class SessionAuth(Auth):
     '''
