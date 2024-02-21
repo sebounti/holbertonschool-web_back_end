@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-""" Module of Index views
+"""
+Module of Index views
 """
 
 from api.v1.views import app_views
@@ -16,6 +17,7 @@ class SessionAuth(Auth):
 
     def create_session(self, user_id: str = None) -> str:
 
+        ''' Create a session'''
         if user_id is None or not isinstance(user_id, str):
             return None
 
