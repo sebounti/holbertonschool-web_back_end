@@ -5,7 +5,7 @@ from api.v1.views import app_views
 from flask import abort, jsonify, request
 from models.user import User
 import os
-
+from api.v1.app import auth
 
 @app_views.route('/auth_session/login', methods=['POST'], strict_slashes=False)
 def login():
@@ -40,9 +40,10 @@ def login():
                  methods=['DELETE'],
                  strict_slashes=False)
 def logout():
-    '''self descriptive'''
-    destroy_session = auth.destroy_session(request)
+    # Détruire la session de l'utilisateur
+    if not auth.destroy_session(request):
+        # Si la session n'a pas pu être détruite, retourner une erreur 404
+        abort(404)
 
-    if destroy_session:
-        return jsonify({}), 200
-    abort(404)
+    # Si la session a été détruite avec succès, retourner une réponse vide
+    return jsonify({}), 200
