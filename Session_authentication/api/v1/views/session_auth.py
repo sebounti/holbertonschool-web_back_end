@@ -41,11 +41,9 @@ def login():
                  methods=['DELETE'],
                  strict_slashes=False)
 def logout():
-    ''' logout session '''
-    # Détruire la session de l'utilisateur
-    if not auth.destroy_session(request):
-        # Si la session n'a pas pu être détruite, retourner une erreur 404
-        abort(404)
+    '''logout session'''
+    destroy_session = auth.destroy_session(request)
 
-    # Si la session a été détruite avec succès, retourner une réponse vide
-    return jsonify({}), 200
+    if destroy_session:
+        return jsonify({}), 200
+    abort(404)
