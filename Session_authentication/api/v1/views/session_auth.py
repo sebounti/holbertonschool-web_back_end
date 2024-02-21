@@ -7,6 +7,7 @@ from models.user import User
 import os
 from api.v1.app import auth
 
+
 @app_views.route('/auth_session/login', methods=['POST'], strict_slashes=False)
 def login():
     """ GET /api/v1/users
