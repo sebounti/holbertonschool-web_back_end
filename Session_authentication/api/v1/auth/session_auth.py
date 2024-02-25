@@ -8,6 +8,7 @@ from models.user import User
 from api.v1.auth.auth import Auth
 import uuid
 
+
 class SessionAuth(Auth):
     '''
         Session Authentication
@@ -47,14 +48,14 @@ class SessionAuth(Auth):
         ''' Delete the user session / logout'''
         if request is None:
             return False
-        session_cookie = self.session_cookie(request)
 
-        if not session_cookie:
+        session_id = self.session_cookie(request)
+        if session_id is None:
             return False
 
-        user_id = self.user_id_for_session_id(session_cookie)
-
+        user_id = self.user_id_for_session_id(session_id)
         if user_id is None:
             return False
-        self.user_id_by_session_id.pop(session_cookie)
+
+        del self.user_id_by_session_id[session_id]
         return True
