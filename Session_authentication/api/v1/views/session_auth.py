@@ -41,9 +41,10 @@ def login():
                  methods=['DELETE'],
                  strict_slashes=False)
 def logout():
-    '''logout session'''
-    destroy_session = SessionAuth.destroy_session(request)
-
-    if destroy_session:
-        return jsonify({}), 200
-    abort(404)
+    """ DELETE /api/v1/auth_session/logout
+        Logout the user
+    """
+    from api.v1.app import auth
+    if not auth.destroy_session(request):
+        abort(404)
+    return jsonify({}), 200
