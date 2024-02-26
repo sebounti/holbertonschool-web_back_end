@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""DB module
+"""
+DB module
 """
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
 from sqlalchemy.ext.declarative import declarative_base
-
 
 from user import Base, User
 
@@ -33,14 +33,14 @@ class DB:
 
     def add_user(self, email: str, hashed_password: str) -> User:
         """
-            Add a new user to the database
+            Add a new user to the database.
 
         Args:
-            email: user email
-            hashed_password: user password
+            email: user email.
+            hashed_password: user password.
 
         Returns:
-            User object
+            User: The user object.
 
         """
         user = User(email=email, hashed_password=hashed_password)
