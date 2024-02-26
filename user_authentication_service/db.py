@@ -42,4 +42,3 @@ class DB:
             User: User object representing the newly added user
         """
         user = User
-        return user
