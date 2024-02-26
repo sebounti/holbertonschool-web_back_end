@@ -47,3 +47,16 @@ class DB:
         self._session.add(user)
         self._session.commit()
         return user
+
+    def find_user_by(self, **kwargs) -> User:
+        """
+            Find a user by a given attribute.
+
+        Args:
+            **kwargs: Arbitrary keyword arguments.
+
+        Returns:
+            User: The user object.
+
+        """
+        return self._session.query(User).filter_by(**kwargs).one()
