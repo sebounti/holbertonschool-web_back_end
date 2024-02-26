@@ -3,7 +3,7 @@
 flask module
 '''
 
-from flask import Flask, jsonify, request, abort, make_response
+from flask import Flask, jsonify, request, abort, redirect, make_response
 from auth import Auth
 
 app = Flask(__name__)
@@ -39,6 +39,32 @@ def register_user() -> str:
         return jsonify({"email": email, "message": "user created"})
     except ValueError:
         abort(400, description="email already exists")
+
+
+@app.route('/sessions', methods=['POST'], strict_slashes=False)
+def login() -> str:
+    '''
+    POST /sessions
+    JSON body:
+            - email
+            - password
+    Return:
+            redirect main or 403 error
+    '''
+
+    session_id = request.cookies.get('session_id', None)
+
+    if session_id is None:
+        abort(403)
+
+    user = AUTH.get_user_from_session_id(session_id)
+
+    if user is None:
+        abort(403)
+
+    AUTH.destroy_session(user.id)
+
+    return redirect('/', code=302)
 
 
 if __name__ == "__main__":
