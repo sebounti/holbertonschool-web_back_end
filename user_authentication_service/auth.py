@@ -112,7 +112,7 @@ class Auth:
         Args:
             user_id: user id
         '''
-        try:
+        user = self._db.get_user_by_id(user_id)
+
+        if user:
             self._db.update_user(user_id, session_id=None)
-        except NoResultFound:
-            return None
