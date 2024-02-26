@@ -41,31 +41,23 @@ def register_user() -> str:
         abort(400, description="email already exists")
 
 
-@app.route('/sessions', methods=['POST'], strict_slashes=False)
+@ app.route('/sessions', methods=['POST'])
 def login() -> str:
-    '''
-    POST /sessions
-    JSON body:
-            - email
-            - password
-    Return:
-            redirect main or 403 error
-    '''
+    """ Sessions Login User """
+    try:
+        email = request.form['email']
+        pwd = request.form['password']
+    except KeyError:
+        abort(401)
 
-    session_id = request.cookies.get('session_id', None)
+    if (AUTH.valid_login(email, pwd)):
+        session_id = AUTH.create_session(email)
+        if session_id is not None:
+            response = jsonify({"email": email, "message": "logged in"})
+            response.set_cookie("session_id", session_id)
+            return response
 
-    if session_id is None:
-        abort(403)
-
-    user = AUTH.get_user_from_session_id(session_id)
-
-    if user is None:
-        abort(403)
-
-    AUTH.destroy_session(user.id)
-
-    return redirect('/', code=302)
-
+    abort(401)
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port="5001")
+    app.run(host="0.0.0.0", port="5000")
