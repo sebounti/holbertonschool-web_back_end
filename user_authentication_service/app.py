@@ -72,7 +72,7 @@ def logout() -> str:
         Auth.destroy_session(user.id)
         return redirect('GET /')
 
-    if not session_id:
+    if session_id is None or not AUTH.get_user_from_session_id(session_id):
         abort(403)
 
 
