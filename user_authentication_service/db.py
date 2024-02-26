@@ -6,6 +6,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
+from sqlalchemy.exc import InvalidRequestError
+from sqlalchemy.orm.exc import NoResultFound
 
 from user import Base, User
 
@@ -57,6 +59,13 @@ class DB:
 
         Returns:
             User: The user object.
-
         """
-        return self._session.query(User).filter_by(**kwargs).one()
+        if not kwargs:
+            raise InvalidRequestError
+
+        users = self._session.query(User).filter_by(**kwargs).one()
+
+        if users is None:
+            raise NoResultFound
+
+        return users
