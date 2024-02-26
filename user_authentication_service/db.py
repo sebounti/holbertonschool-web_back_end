@@ -6,8 +6,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
 
-from user import Base
-from user import User
+from user import Base, User
 
 
 class DB:
@@ -32,17 +31,10 @@ class DB:
         return self.__session
 
     def add_user(self, email: str, hashed_password: str) -> User:
-        """Add a new user to the database
-
-            Args:
-            email (str): Email of the user
-            hashed_password (str): Hashed password of the user
-
-            Returns:
-            User: User object representing the newly added user
         """
-        new_user = User(email=email, hashed_password=hashed_password)
-        self._session.add(new_user)
+            Add a new user to the database
+        """
+        user = User(email=email, hashed_password=hashed_password)
+        self._session.add(user)
         self._session.commit()
-
-        return new_user
+        return user
