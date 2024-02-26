@@ -42,6 +42,5 @@ class DB:
             User: User object representing the newly added user
         """
         user = User(email=email, hashed_password=hashed_password)
-        self._session.add(user)
 
         return user
