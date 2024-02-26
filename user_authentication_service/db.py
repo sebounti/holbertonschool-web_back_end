@@ -91,7 +91,7 @@ class DB:
 
         # Parcourt chaque argument nommé passé à la méthode
         for key, value in kwargs.items():
-            # Vérifie si utilisateur a un attribut avec le nom spécifié dans key
+            # Vérifie si utilisateur a un attribut avec nom spécifié dans key
             if hasattr(user, key):
                 # Si oui, met à jour sa valeur avec celle spécifiée dans value
                 setattr(user, key, value)
