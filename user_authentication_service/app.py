@@ -102,13 +102,12 @@ def get_reset_password_token() -> str:
     email = request.args.get('email')
 
     if email is None:
-        abort(403)
+        abort(403, description="email required")
 
-    try:
+    else:
         token = AUTH.get_reset_password_token(email)
-        return jsonify({"email": email, "reset_token": token}), 200
-    except ValueError:
-        abort(403)
+        return jsonify({"email": "<user email>",
+                        "reset_token": "<reset token>"}), 200
 
 
 if __name__ == "__main__":
