@@ -129,24 +129,25 @@ def get_reset_password_token():
         abort(403)
 
 
-@ app.route('/reset_password', methods={'PUT'})
-def update_password() -> str:
-    '''
-    Update password route. This function handles the PUT request to /reset_password.
+@app.route('/reset_password', methods=['PUT'])
+def update_password():
+    """ This function handles the PUT request to /reset_password."""
 
-    Returns:
-        str: A JSON response indicating success or failure.
-    '''
+    # Extract email, reset token, and new password from form data
+    email = request.form.get('email')
+    token = request.form.get('reset_token')
+    password = request.form.get('new_password')
+
     try:
-        email = request.form['email']
-        reset_token = request.form['reset_token']
-        new_password = request.form['new_password']
-    except KeyError:
-        abort(403)
+        # Attempt to update the password using the provided reset token
+        AUTH.update_password(token, password)
 
-    AUTH.update_password(reset_token, new_password)
-    return jsonify({"email": f"{email}",
-                    "message": "Password updated"}), 200
+        # If successful, return JSON response indicating success
+        return jsonify({"email": email, "message": "Password updated"}), 200
+
+    except Exception:
+        # If an error occurs, abort with 403 error
+        abort(403)
 
 
 
