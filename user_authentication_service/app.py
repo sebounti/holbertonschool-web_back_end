@@ -126,13 +126,10 @@ def update_password() -> str:
     except KeyError:
         abort(403)
 
-    try:
-        AUTH.update_password(reset_token, new_password)
-    except ValueError:
-        abort(403)
+    AUTH.update_password(reset_token, new_password)
+    return jsonify({"email": f"{email}",
+                    "message": "Password updated"}), 200
 
-    message = {"email": email, "message": "Password updated"}
-    return jsonify(message), 200
 
 
 if __name__ == "__main__":
