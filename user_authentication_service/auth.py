@@ -9,7 +9,6 @@ from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.exc import InvalidRequestError
 from uuid import uuid4
 
-
 def _hash_password(password: str) -> bytes:
     """Encrypting passwords
     """
@@ -124,12 +123,14 @@ class Auth:
         Return:
             reset token
         '''
-        if email is None:
-            raise ValueError("Email cannot be None")
 
         user = self._db.find_user_by(email=email)
 
-        token: str = _generate_uuid()
-        self._db.update_user(user.id, reset_token=token)
+        if email is None or not isinstance(user.email, str):
+            raise ValueError("Email cannot be None")
+
+        else:
+            token: str = _generate_uuid()
+            self._db.update_user(user.id, reset_token=token)
 
         return token
