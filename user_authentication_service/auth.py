@@ -112,12 +112,23 @@ class Auth:
 
 
     def get_reset_password_token(self, email: str) -> str:
-        """reset password token if user exists"""
+        """Generate and reset password token"""
         try:
             user = self._db.find_user_by(email=email)
-            token = _generate_uuid()
-            self._db.update_user(user.id, reset_token=token)
-        except NoResultFound:
+            user.reset_token = _generate_uuid()
+            self._db._session.add(user)
+            self._db._session.commit()
+            return user.reset_token
+        except Exception:
             raise ValueError
 
-        return token
+    def update_password(self, reset_token: str, password: str) -> None:
+        """Method that Updates password"""
+        try:
+            user = self._db.find_user_by(reset_token=reset_token)
+            if user:
+                password = _hash_password(password)
+                self._db.update_user(user.id, hashed_password=password,
+                                     reset_token=None)
+        except NoResultFound:
+            raise ValueError
