@@ -99,15 +99,19 @@ def get_reset_password_token() -> str:
     '''
     reset password
     '''
-    email = request.args.get('email')
+    try:
+        email = request.form['email']
+        reset_tok = request.form["reset_token"]
+        new_pwd = request.form['new_password']
+    except KeyError:
+        abort(403)
 
-    if email is None:
-        abort(403, description="email required")
+    try:
+        AUTH.update_password(reset_tok, new_pwd)
+    except ValueError:
+        abort(403)
 
-    else:
-        token = AUTH.get_reset_password_token(email)
-        return jsonify({"email": "<user email>",
-                        "reset_token": "<reset token>"}), 200
+    return jsonify({"email": email, "message": "Password updated"}), 200
 
 
 if __name__ == "__main__":
