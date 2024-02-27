@@ -123,8 +123,6 @@ class Auth:
         Return:
             reset token
         '''
-        if email is None:
-            raise ValueError("Email cannot be None")
 
         # Recherche de l'utilisateur dans la base de données
         user = self._db.find_user_by(email=email)
@@ -135,12 +133,10 @@ class Auth:
 
         # Génére du jeton de réinitialisation de mdp
         token: str = None
-        try:
+
+        if user:
             token = _generate_uuid()
             # Mise à jour de l'utilisateur avec le jeton de réinitialisation
             self._db.update_user(user.id, reset_token=token)
-        except Exception as e:
-            # Gérer les erreurs lors de la mise à jour de l'utilisateur
-            raise ValueError(f"Failed to generate reset token: {str(e)}")
 
         return token
