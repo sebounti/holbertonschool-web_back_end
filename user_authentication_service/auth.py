@@ -6,18 +6,17 @@ import bcrypt
 from db import DB
 from user import User, Base
 from sqlalchemy.orm.exc import NoResultFound
-from uuid import uuid4
+import uuid
 
 def _hash_password(password: str) -> bytes:
     """Encrypting passwords
     """
     return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
-
 def _generate_uuid() -> str:
     """Generate a UUID
     """
-    return str(uuid4())
+    return str(uuid.uuid4())
 
 
 class Auth:
@@ -116,11 +115,9 @@ class Auth:
         """reset password token if user exists"""
         try:
             user = self._db.find_user_by(email=email)
+            token = _generate_uuid()
+            self._db.update_user(user.id, reset_token=token)
         except NoResultFound:
             raise ValueError
-
-        token = _generate_uuid()
-
-        self._db.update_user(user.id, reset_token=token)
 
         return token
