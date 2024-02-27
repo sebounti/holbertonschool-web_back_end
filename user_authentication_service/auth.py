@@ -114,29 +114,14 @@ class Auth:
         self._db.update_user(user_id, session_id=None)
 
     def get_reset_password_token(self, email: str) -> str:
-        '''
-        Get reset password token
+        """reset password token if user exists"""
+        try:
+            user = self._db.find_user_by(email=email)
+        except NoResultFound:
+            raise ValueError
 
-        Args:
-            email: email of the user
+        token = _generate_uuid()
 
-        Return:
-            reset token
-        '''
-
-        # Recherche de l'utilisateur dans la base de données
-        user = self._db.find_user_by(email=email)
-
-        # Vérifie si l'utilisateur existe
-        if user is None:
-            raise ValueError("No user found with the provided email")
-
-        # Génére du jeton de réinitialisation de mdp
-        token: str = None
-
-        if user:
-            token = _generate_uuid()
-            # Mise à jour de l'utilisateur avec le jeton de réinitialisation
-            self._db.update_user(user.id, reset_token=token)
+        self._db.update_user(user.id, reset_token=token)
 
         return token
