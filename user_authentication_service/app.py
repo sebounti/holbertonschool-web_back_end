@@ -76,7 +76,7 @@ def logout() -> str:
         abort(403)
 
 
-@ app.route('/profile', methods=['GET'])
+@ app.route('/profile', methods=['POST'])
 def profile() -> str:
     '''
     profile
@@ -91,10 +91,11 @@ def profile() -> str:
     if user is None:
         abort(403)
 
-    return jsonify({"email": user.email}), 200
+    message = {"email": user.email}
+    return jsonify(message), 200
 
 
-@ app.route('/reset_password', methods=['GET'])
+@ app.route('/reset_password', methods=['GET'], strict_slashes=True)
 def get_reset_password_token() -> str:
     '''
     reset password
@@ -104,7 +105,6 @@ def get_reset_password_token() -> str:
     except KeyError:
         abort(403)
 
-    token: str = ''
     try:
         token = AUTH.get_reset_password_token(email)
     except ValueError:
