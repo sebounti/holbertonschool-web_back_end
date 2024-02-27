@@ -67,23 +67,22 @@ class Auth:
 
     def create_session(self, email: str) -> str:
         '''
-        Make session id and update in the database
+        create session
 
-        Args:
-            email: email of the user
+        args:
+            email: email
 
-        Return:
+        return:
             session id
+
         '''
         try:
             user = self._db.find_user_by(email=email)
-            session_id = _generate_uuid()
-            self._db.update_user((user.id), session_id=session_id)
-
-            return session_id
-
         except NoResultFound:
             return None
+        session_id = _generate_uuid()
+        self._db.update_user(user.id, session_id=session_id)
+        return session_id
 
     def get_user_from_session_id(self, session_id: str) -> str:
         '''
@@ -111,7 +110,9 @@ class Auth:
         Args:
             user_id: user id
         '''
-        self._db.update_user(user_id, session_id=None)
+        if user_id:
+            self._db.update_user(user_id, session_id=None)
+
 
     def get_reset_password_token(self, email: str) -> str:
         """reset password token if user exists"""
