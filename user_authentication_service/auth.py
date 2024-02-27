@@ -125,13 +125,11 @@ class Auth:
             reset token
         '''
         if email is None:
-            raise ValueError
+            raise ValueError("Email cannot be None")
 
-        try:
-            user = self._db.find_user_by(email=email)
-            token: str = _generate_uuid()
+        user = self._db.find_user_by(email=email)
 
-            self._db.update_user((user.id), reset_token=token)
+        token: str = _generate_uuid()
+        self._db.update_user(user.id, reset_token=token)
 
-            return token
-        except NoResultFound:
+        return token
