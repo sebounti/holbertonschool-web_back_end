@@ -99,26 +99,34 @@ def profile() -> str:
     return jsonify(message), 200
 
 
-@ app.route('/reset_password', methods=['GET'], strict_slashes=True)
-def get_reset_password_token() -> str:
+@app.route('/reset_password', methods=['POST'], strict_slashes=False)
+def get_reset_password_token():
     '''
-    Reset password route.function handles the GET request to /reset_password.
+    Reset password route. This function handles the POST request to /reset_password.
 
     Returns:
-        str:JSON response containing the email and reset token, or a 403 error.
+        str: A JSON response containing the email and reset token, or a 403 error.
     '''
-    try:
-        email = request.form['email']
-    except KeyError:
+    # Extract email from form data
+    email = request.form.get('email')
+
+    # If email is missing, abort with 403 error
+    if not email:
         abort(403)
 
     try:
+        # Attempt to get the reset token for the provided email
         token = AUTH.get_reset_password_token(email)
-    except ValueError:
-        abort(403)
 
-    message = {"email": email, "reset_token": token}
-    return jsonify(message), 200
+        # If token is retrieved, return JSON response with email and token
+        if token:
+            return jsonify({"email": email, "reset_token": token}), 200
+        else:
+            # If token is not found, abort with 403 error
+            abort(403)
+    except ValueError:
+        # If an error occurs, abort with 403 error
+        abort(403)
 
 
 @ app.route('/reset_password', methods={'PUT'})
