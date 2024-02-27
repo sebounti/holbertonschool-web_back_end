@@ -123,12 +123,17 @@ class Auth:
         Return:
             reset token
         '''
+        # check if email exists
         user = self._db.find_user_by(email=email)
-        token: str = _generate_uuid()
-        self._db.update_user(user.id, reset_token=token)
 
+        #
         if email is None or not isinstance(user.email, str):
-            raise ValueError("Email cannot be None")
+            raise ValueError
 
         else:
-            return token
+            # generate token
+            token: str = _generate_uuid()
+            # update user
+            self._db.update_user(user.id, reset_token=token)
+
+        return token
