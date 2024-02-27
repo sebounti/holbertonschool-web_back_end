@@ -21,12 +21,13 @@ def welcome() -> str:
 
 @app.route('/users', methods=['POST'], strict_slashes=False)
 def register_user() -> str:
-    '''POST /users
+    '''
+        Register a user
     JSON body:
-      - email
-      - password
+        - email
+        - password
     Return:
-      - user
+        - user
     '''
     email = request.form.get("email")
     password = request.form.get("password")
@@ -63,7 +64,10 @@ def login() -> str:
 @ app.route('/sessions', methods=['DELETE'])
 def logout() -> str:
     '''
-    logout session
+    Logout route. This function handles the DELETE request to /sessions.
+
+    Returns:
+        str: A message indicating success or failure.
     '''
     session_id = request.cookies.get('session_id')
     user = AUTH.get_user_from_session_id(session_id)
@@ -98,7 +102,10 @@ def profile() -> str:
 @ app.route('/reset_password', methods=['GET'], strict_slashes=True)
 def get_reset_password_token() -> str:
     '''
-    reset password
+    Reset password route.function handles the GET request to /reset_password.
+
+    Returns:
+        str:JSON response containing the email and reset token, or a 403 error.
     '''
     try:
         email = request.form['email']
@@ -117,7 +124,10 @@ def get_reset_password_token() -> str:
 @ app.route('/reset_password', methods={'PUT'})
 def update_password() -> str:
     '''
-    update password
+    Update password route. This function handles the PUT request to /reset_password.
+
+    Returns:
+        str: A JSON response indicating success or failure.
     '''
     try:
         email = request.form['email']
