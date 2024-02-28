@@ -109,5 +109,5 @@ class Auth:
             raise ValueError
 
     def destroy_session(self, user_id: int) -> None:
-        """ Destroy session """
+        """ Destroys a session """
         self._db.update_user(user_id, session_id=None)
