@@ -2,11 +2,12 @@
 """
 encrypting passwords
 """
+
 import bcrypt
-from db import DB
-from user import User, Base
-from sqlalchemy.orm.exc import NoResultFound
 import uuid
+from db import DB
+from user import User
+from sqlalchemy.orm.exc import NoResultFound
 
 def _hash_password(password: str) -> bytes:
     """Encrypting passwords
@@ -64,15 +65,7 @@ class Auth:
             return False
 
     def create_session(self, email: str) -> str:
-        '''
-        create session
-
-        args:
-            email: email
-
-        return:
-            session id
-        '''
+        """ create session user """
         try:
             user = self._db.find_user_by(email=email)
             session_id = _generate_uuid()
@@ -83,15 +76,7 @@ class Auth:
 
 
     def get_user_from_session_id(self, session_id: str) -> str:
-        '''
-        Get user from session id
-
-        Args:
-            session_id: session id
-
-        Return:
-            user
-        '''
+        """ Get user from session id """
         if session_id is None:
             return None
 
@@ -102,19 +87,7 @@ class Auth:
             return None
 
     def destroy_session(self, user_id: int) -> None:
-        """
-        Destroy session
-
-        Args:
-
-            user_id: user id
-
-        Returns:
-
-            None
-
-
-        """
+        """ Destroy session """
         try:
             user = self._db.find_user_by(id=user_id)
             return setattr(user, 'session_id', None)
@@ -122,7 +95,7 @@ class Auth:
             return None
 
     def get_reset_password_token(self, email: str) -> str:
-        """Generate and reset password token"""
+        """ Generate and reset password token """
         try:
             user = self._db.find_user_by(email=email)
             user.reset_token = _generate_uuid()
@@ -133,7 +106,7 @@ class Auth:
             raise ValueError
 
     def update_password(self, reset_token: str, password: str) -> None:
-        """Method that Updates password"""
+        """ Method that Updates password """
         try:
             user = self._db.find_user_by(reset_token=reset_token)
             if user:
