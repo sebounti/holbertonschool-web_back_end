@@ -71,9 +71,8 @@ def logout() -> str:
         str: A message indicating success or failure.
     '''
     session_id = request.cookies.get('session_id')
-
     try:
-        user = AUTH.get_user_from_session_id(session_id)
+        user = Auth.get_user_from_session_id(session_id)
         Auth.destroy_session(user.id)
         return redirect("http://localhost:5000/", 302)
 
