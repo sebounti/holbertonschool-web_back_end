@@ -21,7 +21,7 @@ def _hash_password(password: str) -> bytes:
 def _generate_uuid() -> str:
     """Generate a UUID
     """
-    return str(uuid.uuid4())
+    return str(uuid4())
 
 
 class Auth:
@@ -47,8 +47,11 @@ class Auth:
             raise ValueError("User {} already exists".format(email))
 
         except NoResultFound:
-            passwd: str = _hash_password(password)
-            user = self._db.add_user(email, passwd)
+            # If no user is found, proceed with adding the user
+            hashed_password: str = _hash_password(password)
+            # Add the new user to the database
+            user = self._db.add_user(email, hashed_password)
+            return user
 
     def valid_login(self, email: str, password: str) -> bool:
         """
