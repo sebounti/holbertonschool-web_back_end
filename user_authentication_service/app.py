@@ -4,6 +4,7 @@ flask module
 '''
 
 from flask import Flask, jsonify, request, abort, redirect, make_response
+from sqlalchemy.orm.exc import NoResultFound
 from auth import Auth
 
 app = Flask(__name__)
@@ -70,13 +71,13 @@ def logout() -> str:
         str: A message indicating success or failure.
     '''
     session_id = request.cookies.get('session_id')
-    user = AUTH.get_user_from_session_id(session_id)
 
-    if user:
+    try:
+        user = AUTH.get_user_from_session_id(session_id)
         Auth.destroy_session(user.id)
-        return redirect('GET /')
+        return redirect("http://localhost:5000/", 302)
 
-    if session_id is None or not AUTH.get_user_from_session_id(session_id):
+    except Exception:
         abort(403)
 
 
@@ -102,30 +103,19 @@ def profile() -> str:
 @app.route('/reset_password', methods=['POST'], strict_slashes=False)
 def get_reset_password_token():
     '''
-    Reset password route. This function handles the POST request to /reset_password.
+    Reset password route.function handles the POST request to /reset_password.
 
     Returns:
-        str: A JSON response containing the email and reset token, or a 403 error.
+        str:JSON response containing the email and reset token, or a 403 error.
     '''
     # Extract email from form data
     email = request.form.get('email')
 
-    # If email is missing, abort with 403 error
-    if not email:
-        abort(403)
-
     try:
-        # Attempt to get the reset token for the provided email
-        token = AUTH.get_reset_password_token(email)
-
-        # If token is retrieved, return JSON response with email and token
-        if token:
-            return jsonify({"email": email, "reset_token": token}), 200
-        else:
-            # If token is not found, abort with 403 error
-            abort(403)
-    except ValueError:
-        # If an error occurs, abort with 403 error
+        reset_token = AUTH.get_reset_password_token(email)
+        return jsonify({"email": "{}".format(email),
+                        "reset_token": "{}".format(reset_token)})
+    except Exception:
         abort(403)
 
 
@@ -143,12 +133,12 @@ def update_password():
         AUTH.update_password(token, password)
 
         # If successful, return JSON response indicating success
-        return jsonify({"email": email, "message": "Password updated"}), 200
+        return jsonify({"email": "{}".format(email),
+                        "message": "Password updated"}), 200
 
     except Exception:
         # If an error occurs, abort with 403 error
         abort(403)
-
 
 
 if __name__ == "__main__":
