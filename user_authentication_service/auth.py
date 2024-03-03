@@ -70,11 +70,16 @@ class Auth:
     def create_session(self, email: str) -> str:
         """ create session user """
         try:
+            # retrieve user
             user = self._db.find_user_by(email=email)
+            # generate a new session id
             session_id = _generate_uuid()
+            # update user session id
             self._db.update_user(user.id, session_id=session_id)
+            # return session id
             return session_id
         except NoResultFound:
+            # if user does not exist
             return None
 
     def get_user_from_session_id(self, session_id: str) -> str:
