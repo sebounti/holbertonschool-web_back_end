@@ -12,19 +12,17 @@ class Config(object):
 
 
 app = Flask(__name__, template_folder='templates')
-babel = Babel(app)
 app.config.from_object(Config)
-
-
-@app.route('/')
-def index():
-    """ route to display a message"""
-    return render_template("1-index.html")
+babel = Babel(app)
 
 
 @babel.localeselector
 def get_locale():
-    """ Select a language translation """
+    """ Locale language
+
+        Return:
+            Best match to the language
+    """
     user_locale = request.args.get('locale')
     if user_locale in app.config['LANGUAGES']:
         return user_locale
