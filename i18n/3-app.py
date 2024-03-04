@@ -33,7 +33,10 @@ def get_locale():
 @app.route('/', methods=["GET"])
 def hello_world():
     """
-    index template
+    Greeting
+
+        Return:
+            Initial template html
     """
     return render_template("3-index.html")
 
