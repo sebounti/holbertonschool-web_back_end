@@ -18,20 +18,7 @@ class TestAccessNestedMap(unittest.TestCase):
     ])
     def test_access_nested_map(self, nested_map: Dict[Any, Any],
                                 path: List[str], expected: Any) -> None:
-        """
-        test access nested map
-
-        Args:
-        nested_map: dict
-            nested map
-        path: list
-            list of keys
-        result_expected: any
-            expected value
-
-        Returns:
-            ok if test passes
-        """
+        """ Test access nested map"""
         self.assertEqual(access_nested_map(nested_map, path), expected)
 
 
