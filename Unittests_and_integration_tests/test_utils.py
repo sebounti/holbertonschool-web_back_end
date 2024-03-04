@@ -56,16 +56,16 @@ class TestGetJson(unittest.TestCase):
 
 
 class Testmemoize(unittest.TestCase):
-    ''' memoize unittest '''
+    """ memoize unittest """
 
     def test_memoize(self):
-        ''' self descriptive'''
+        """ self descriptive """
 
         # Définition d'une classe test pour illustrer l'usage de memoize.
         class TestClass:
-            ''' test class'''
+            """ test class """
             def a_method(self):
-                ''' a method'''
+                """ a method """
                 return 42
 
             @memoize
