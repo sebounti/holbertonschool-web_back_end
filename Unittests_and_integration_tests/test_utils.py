@@ -71,7 +71,7 @@ class Testmemoize(unittest.TestCase):
 
         # Utilis de patch pour créer un mock de a_method dans TestClass.
         # Ceci permet de vérifier si la méthode est appelée plus d'une fois.
-        with patch.object(TestClass, 'a_method') as mock:
+        with patch.object(TestClass, 'a_method') as mocked:
             # Création d'une instance de TestClass pour le test.
             spec = TestClass()
             # Premier accès à la propriété a_property.
@@ -82,7 +82,7 @@ class Testmemoize(unittest.TestCase):
             spec.a_property
             # Vérification que a_method a été appelée une seule fois,
             # confirme ainsi que le résultat a été correctement mis en cache.
-            mock.assert_called_once()
+            mocked.assert_called_once()
 
 if __name__ == "__main__":
     unittest.main()
