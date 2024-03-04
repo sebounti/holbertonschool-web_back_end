@@ -22,7 +22,6 @@ class TestGithubOrgClient(unittest.TestCase):
         test_class.org()
         mock.assert_called_once_with(endpoint)
 
-
     @parameterized.expand([
         ("random-url", {'repos_url': 'http://some_url.com'})
     ])
