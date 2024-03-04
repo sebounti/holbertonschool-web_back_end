@@ -57,6 +57,7 @@ class TestGetJson(unittest.TestCase):
 
 class Testmemoize(unittest.TestCase):
     ''' memoize unittest '''
+
     def test_memoize(self):
         ''' self descriptive'''
 
@@ -77,6 +78,7 @@ class Testmemoize(unittest.TestCase):
             returned = test_class.a_property
             self.assertEqual(returned, 42)
             patched.assert_called_once()
+
 
 if __name__ == "__main__":
     unittest.main()
