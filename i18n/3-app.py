@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """ Module to start a Flask web application """
 from flask import Flask, render_template
-from flask_babel import Babel
+from flask_babel import Babel, _
 from flask import request
 
 app = Flask(__name__)
@@ -31,7 +31,7 @@ def get_locale():
 
 
 @app.route('/', methods=["GET"])
-def index():
+def hello_world():
     """
     index template
     """
@@ -39,4 +39,4 @@ def index():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port="5000")
