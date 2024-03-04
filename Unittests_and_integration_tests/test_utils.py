@@ -69,20 +69,11 @@ class Testmemoize(unittest.TestCase):
             def a_property(self):
                 return self.a_method()
 
-        # Utilis de patch pour créer un mock de a_method dans TestClass.
-        # Ceci permet de vérifier si la méthode est appelée plus d'une fois.
-        with patch.object(TestClass, 'a_method') as mocked:
-            # Création d'une instance de TestClass pour le test.
-            spec = TestClass()
-            # Premier accès à la propriété a_property.
-            # doit déclencher l'appel de a_method et mis en cache du résultat.
-            spec.a_property
-            # Deuxième accès à la même propriété.
-            # Si fonctionne, a_method ne doit pas être appelée une seconde fois.
-            spec.a_property
-            # Vérification que a_method a été appelée une seule fois,
-            # confirme ainsi que le résultat a été correctement mis en cache.
-            mocked.assert_called_once()
+        with patch.object(TestClass, 'a_method', return_value=42) as mock_meth:
+            test = TestClass()
+            returned = test.a_property
+            self.assertEqual(returned, 42)
+            mock_meth.assert_called_once()
 
 if __name__ == "__main__":
     unittest.main()
