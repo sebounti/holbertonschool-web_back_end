@@ -4,10 +4,6 @@ from flask import Flask, render_template, request
 from flask_babel import Babel, _
 
 
-app = Flask(__name__, template_folder='templates')
-babel = Babel(app)
-
-
 class Config(object):
     """ Configuration for languages """
     LANGUAGES = ["en", "fr"]
@@ -15,6 +11,8 @@ class Config(object):
     BABEL_DEFAULT_TIMEZONE = "UTC"
 
 
+app = Flask(__name__, template_folder='templates')
+babel = Babel(app)
 app.config.from_object(Config)
 
 
@@ -38,7 +36,7 @@ def hello_world():
     """
     index template
     """
-    return render_template('3-index.html')
+    return render_template('4-index.html')
 
 
 if __name__ == "__main__":
