@@ -17,7 +17,7 @@ class TestAccessNestedMap(unittest.TestCase):
         ({"a": {"b": 2}}, ("a", "b"), 2),
     ])
     def test_access_nested_map(self, nested_map: Dict[Any, Any],
-                                path: List[str], expected: Any) -> None:
+                               path: List[str], expected: Any) -> None:
         """ Test access nested map"""
         self.assertEqual(access_nested_map(nested_map, path), expected)
 
@@ -49,10 +49,11 @@ class TestGetJson(unittest.TestCase):
                 ''' json method mocked'''
                 return test_payload
 
-        # Utilise patch pour remplacer l'appel à requests.get par un objet mock.
+        # Utili patch pour remplacer l'appel à requests.get par un objet mock.
         with patch('requests.get') as MockClass:
             MockClass.return_value = Mocked()
             self.assertEqual(get_json(test_url), test_payload)
+
 
 class Testmemoize(unittest.TestCase):
     ''' memoize unittest '''
@@ -74,6 +75,7 @@ class Testmemoize(unittest.TestCase):
             returned = test.a_property
             self.assertEqual(returned, 42)
             mock_meth.assert_called_once()
+
 
 if __name__ == "__main__":
     unittest.main()
