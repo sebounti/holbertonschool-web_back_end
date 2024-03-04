@@ -59,6 +59,7 @@ class Testmemoize(unittest.TestCase):
     ''' memoize unittest '''
     def test_memoize(self):
         ''' self descriptive'''
+
         # Définition d'une classe test pour illustrer l'usage de memoize.
         class TestClass:
             ''' test class'''
