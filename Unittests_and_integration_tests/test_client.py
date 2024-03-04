@@ -28,7 +28,7 @@ class TestGithubOrgClient(unittest.TestCase):
     ])
     def test_public_repos_url(self, name, result):
         '''self descriptive'''
-        with patch('client.GithubOrgClient.org',
+        with patch('GithubOrgClient.org',
                    PropertyMock(return_value=result)):
             response = GithubOrgClient(name)._public_repos_url
             self.assertEqual(response, result.get('repos_url'))
