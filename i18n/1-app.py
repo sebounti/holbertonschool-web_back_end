@@ -17,7 +17,7 @@ class Config(object):
 app.config.from_object(Config)
 
 
-@app.route("/")
+@app.route('/')
 def index():
     """ route to display a message"""
     return render_template("1-index.html")
