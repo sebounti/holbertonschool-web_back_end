@@ -8,9 +8,9 @@ app = Flask(__name__)
 babel = Babel(app)
 
 
-@app.route('/')
-def hello_world():
-    """  Function to handle requests to the root of the web app"""
+@app.route('/', methods=['GET'], strict_slashes=False)
+def index():
+    """  route to display a message"""
     return render_template('0-index.html')
 
 
