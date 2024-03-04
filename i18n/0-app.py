@@ -2,7 +2,7 @@
 """ Module to start a Flask web application """
 
 from flask import Flask, render_template
-from flask import Babel
+from flask_babel import Babel
 
 app = Flask(__name__)
 babel = Babel(app)
