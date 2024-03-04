@@ -20,7 +20,11 @@ app.config.from_object(Config)
 
 @babel.localeselector
 def get_locale():
-    """ Select a language translation """
+    """ Locale language
+
+        Return:
+            Best match to the language
+    """
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
