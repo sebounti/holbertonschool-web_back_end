@@ -6,6 +6,7 @@ import unittest
 from parameterized import parameterized
 from unittest.mock import patch, Mock
 from utils import access_nested_map
+from typing import Any, Dict, List, Tuple
 
 
 class TestAccessNestedMap(unittest.TestCase):
@@ -15,7 +16,8 @@ class TestAccessNestedMap(unittest.TestCase):
         ({"a": {"b": 2}}, ("a",), {"b": 2}),
         ({"a": {"b": 2}}, ("a", "b"), 2),
     ])
-    def test_access_nested_map(self, nested_map, path, expected):
+    def test_access_nested_map(self, nested_map: Dict[Any, Any],
+                                path: List[str], expected: Any) -> None:
         """
         test access nested map
 
