@@ -21,7 +21,6 @@ app.config.from_object(Config)
 @babel.localeselector
 def get_locale() -> str:
     """ Locale language
-
         Return:
             Best match to the language
     """
@@ -31,8 +30,7 @@ def get_locale() -> str:
 @app.route('/', methods=["GET"])
 def hello_world() -> str:
     """
-    Greeting
-
+    greeting in the language of the user
         Return:
             Initial template html
     """
