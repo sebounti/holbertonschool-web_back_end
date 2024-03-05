@@ -7,7 +7,7 @@ from fixtures import TEST_PAYLOAD
 from parameterized import parameterized, parameterized_class
 from unittest.mock import patch, PropertyMock, Mock
 from client import GithubOrgClient
-
+from client import get_json
 
 class TestGithubOrgClient(unittest.TestCase):
 
@@ -24,8 +24,7 @@ class TestGithubOrgClient(unittest.TestCase):
         mocked_get_json.assert_called_once_with(endpoint)
 
     def test_public_repos_url(self):
-        """Test that the result of _public_repos_url
-        is the expected one based on the mocked payload."""
+        """Test that the result of _public_repos_url"""
         with patch.object("client.GithubOrgClient.org",
                           new_callable=PropertyMock) as mock:
             payload = {"repos_url": "World"}
