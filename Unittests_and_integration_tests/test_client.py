@@ -7,7 +7,7 @@ from fixtures import TEST_PAYLOAD
 from parameterized import parameterized, parameterized_class
 from unittest.mock import patch, PropertyMock, Mock
 from client import GithubOrgClient
-from client import get_json
+
 
 class TestGithubOrgClient(unittest.TestCase):
 
@@ -51,3 +51,12 @@ class TestGithubOrgClient(unittest.TestCase):
 
             mock_public.assert_called_once()
             mock_json.assert_called_once()
+
+    @parameterized.expand([
+        ({"license": {"key": "my_license"}}, "my_license", True),
+        ({"license": {"key": "other_license"}}, "my_license", False)
+    ])
+    def test_as_license(repo, license_key, expected):
+        # Assuming GithubOrgClient is initialized with an organization name.
+        client = GithubOrgClient("openai")
+        assert client.has_license(repo, license_key) == expected
