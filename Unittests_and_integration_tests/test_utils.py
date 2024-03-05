@@ -1,25 +1,22 @@
 #!/usr/bin/env python3
-"""
-file unittests
-"""
+"""Module for utils.py unittests"""
 import json
+from parameterized import parameterized
 import requests
 import unittest
-from parameterized import parameterized
-from unittest.mock import patch, Mock
+from unittest.mock import patch
 from utils import access_nested_map, get_json, memoize
-from typing import Any, Dict, List, Tuple
 
 
 class TestAccessNestedMap(unittest.TestCase):
-    """ Access nested map """
+    """Unit tests for access_nested_map"""
     @parameterized.expand([
         ({"a": 1}, ("a",), 1),
         ({"a": {"b": 2}}, ("a",), {"b": 2}),
-        ({"a": {"b": 2}}, ("a", "b"), 2),
+        ({"a": {"b": 2}}, ("a", "b"), 2)
     ])
     def test_access_nested_map(self, nested_map, path, expected):
-        """ Test access nested map"""
+        """Tests access_nested_map returns what it is supposed to"""
         self.assertEqual(access_nested_map(nested_map, path), expected)
 
     @parameterized.expand([
@@ -27,13 +24,13 @@ class TestAccessNestedMap(unittest.TestCase):
         ({"a": 1}, ("a", "b"))
     ])
     def test_access_nested_map_exception(self, nested_map, path):
-        ''' test exception'''
+        """Test that a KeyError is raised"""
         with self.assertRaises(KeyError):
             access_nested_map(nested_map, path)
 
 
 class TestGetJson(unittest.TestCase):
-    ''' get json unittest '''
+    """get_json unit tests"""
     @parameterized.expand([
         ("http://example.com", {"payload": True}),
         ("http://holberton.io", {"payload": False})
@@ -47,13 +44,12 @@ class TestGetJson(unittest.TestCase):
             self.assertEqual(response, test_payload)
 
 
-class Testmemoize(unittest.TestCase):
-    """ memoize unittest """
+class TestMemoize(unittest.TestCase):
+    """memoize unit test """
 
     def test_memoize(self):
-        """ Test memoize"""
-
-        # Définition d'une classe test pour illustrer l'usage de memoize.
+        """Test that when calling a_property twice, the correct result is
+        returned but a_method is only called once using assert_called_once"""
         class TestClass:
 
             def a_method(self):
