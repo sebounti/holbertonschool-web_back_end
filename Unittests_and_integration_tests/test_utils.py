@@ -36,20 +36,21 @@ class TestGetJson(unittest.TestCase):
         ("http://holberton.io", {"payload": False})
     ])
     def test_get_json(self, test_url, test_payload):
-        """Test that utils.get_json returns the expected result"""
+        """ Mock HTTP calls
+
+            args:
+                url: Web page to look
+                response: result of the consult
+        """
         with patch('requests.get') as mock_request:
-            mock_request().json.return_value = test_payload
-            mock_request.assert_called_once()
-            response = get_json(test_url)
-            self.assertEqual(response, test_payload)
+            mock_request.return_value.json.return_value = test_payload
+            self.assertEqual(get_json(url=test_url), test_payload)
 
 
 class TestMemoize(unittest.TestCase):
     """memoize unit test """
 
     def test_memoize(self):
-        """Test that when calling a_property twice, the correct result is
-        returned but a_method is only called once using assert_called_once"""
         class TestClass:
 
             def a_method(self):
