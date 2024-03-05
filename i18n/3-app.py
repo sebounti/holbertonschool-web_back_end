@@ -20,7 +20,7 @@ app.config.from_object(Config)
 
 @babel.localeselector
 def get_locale() -> str:
-    """ Locale language
+    """ get locale language
         Return:
             Best match to the language
     """
@@ -39,4 +39,4 @@ def hello_world() -> str:
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port="5000")
+    app.run(host="0.0.0.0", port=5000)
