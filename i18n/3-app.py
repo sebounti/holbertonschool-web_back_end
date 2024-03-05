@@ -30,7 +30,8 @@ def get_locale() -> str:
 @app.route('/', methods=["GET"])
 def hello_world() -> str:
     """
-    greeting in the language of the user
+        greeting in the language of the user
+
         Return:
             Initial template html
     """
