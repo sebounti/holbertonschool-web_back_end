@@ -2,6 +2,7 @@
 """
 file unittests
 """
+import json
 import requests
 import unittest
 from parameterized import parameterized
@@ -50,7 +51,7 @@ class Testmemoize(unittest.TestCase):
     """ memoize unittest """
 
     def test_memoize(self):
-        """ self descriptive """
+        """ Test memoize"""
 
         # Définition d'une classe test pour illustrer l'usage de memoize.
         class TestClass:
