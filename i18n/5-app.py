@@ -27,7 +27,7 @@ app.config.from_object(Config)
 
 
 @app.route('/', methods=["GET"])
-def hello_world() -> str:
+def hello_world():
     """
     Greeting.
 
@@ -60,7 +60,7 @@ def before_request():
 
 
 @babel.localeselector
-def get_locale() -> str:
+def get_locale():
     """Locale language.
 
     Return:
