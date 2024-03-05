@@ -61,9 +61,8 @@ class Testmemoize(unittest.TestCase):
 
         # Définition d'une classe test pour illustrer l'usage de memoize.
         class TestClass:
-            """ test class """
+
             def a_method(self):
-                """ a method """
                 return 42
 
             @memoize
