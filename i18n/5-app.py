@@ -42,10 +42,10 @@ def get_locale() -> str:
     Return:
         Best match to the language.
     """
-    user_locale = request.args.get('locale')
-    if user_locale in app.config['LANGUAGES']:
-        return user_locale
-    return request.accept_languages.best_match(app.config['LANGUAGES'])
+    locale = request.args.get('locale')
+    if locale in Config.LANGUAGES:
+        return locale
+    return request.accept_languages.best_match(Config.LANGUAGES)
 
 
 def get_user(user):
