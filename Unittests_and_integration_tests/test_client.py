@@ -67,8 +67,15 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.get_patcher = patch('client.get_json')
-        cls.mock_get = cls.get_patcher.start()
+        conf = {'return_value.json.side_effect':
+                [
+                    cls.org_payload, cls.repos_payload,
+                    cls.org_payload, cls.repos_payload
+                ]
+                }
+        cls.get_patcher = patch('requests.get', **conf)
+
+        cls.mock = cls.get_patcher.start()
 
 
     def test_public_repos(self):
