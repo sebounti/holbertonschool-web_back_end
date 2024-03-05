@@ -70,16 +70,6 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         cls.get_patcher = patch('client.get_json')
         cls.mock_get = cls.get_patcher.start()
 
-    @classmethod
-    def tearDownClass(cls):
-        cls.get_patcher.stop()
-
-    def setUp(self):
-        self.get_patcher = patch('client.get_json')
-        self.mock_get = self.get_patcher.start()
-
-    def tearDown(self):
-        self.get_patcher.stop()
 
     def test_public_repos(self):
         self.mock_get.side_effect = [self.org_payload, self.repos_payload]
