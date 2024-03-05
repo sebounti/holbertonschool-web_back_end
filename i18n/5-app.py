@@ -54,11 +54,14 @@ def get_user(user_id) -> dict:
     """
     Get user from request
     """
-    if user_id in users:
-        return users[user_id]
-    else:
-        return None
-
+    user_id = request.args.get('login_as')
+    try:
+        user_id = int(user_id)
+        if user_id in users:
+            return users[user_id]
+    except (ValueError, TypeError):
+        pass
+    return None
 
 @app.before_request
 def before_request():
