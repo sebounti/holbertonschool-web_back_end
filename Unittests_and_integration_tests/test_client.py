@@ -60,3 +60,7 @@ class TestGithubOrgClient(unittest.TestCase):
         # Assuming GithubOrgClient is initialized with an organization name.
         client = GithubOrgClient("openai")
         assert client.has_license(repo, license_key) == expected
+        assert client.has_license.__annotations__['return'] == bool
+        assert client.has_license.__annotations__['repo'] == dict
+        assert client.has_license.__annotations__['license_key'] == str
+        assert client.has_license.__annotations__['expected'] == bool
