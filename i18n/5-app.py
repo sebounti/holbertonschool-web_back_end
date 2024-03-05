@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """Module to start a Flask web application."""
 from flask import Flask, render_template, request, g
+
 from flask_babel import Babel
+
 
 app = Flask(__name__)
 babel = Babel(app)
@@ -63,11 +65,7 @@ def before_request():
     """
     Get user, if any
     """
-    user_id = request.args.get('login_as')
-    if user_id:
-        user = get_user(int(user_id))
-        if user:
-            g.user = user
+    g.locale = str(get_locale())
 
 
 if __name__ == "__main__":
