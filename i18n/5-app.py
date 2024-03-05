@@ -34,7 +34,7 @@ def hello_world() -> str:
     Return:
         Initial template html.
     """
-    return render_template('5-index.html', user=g.user)
+    return render_template('5-index.html')
 
 
 def get_user(user_id) -> dict:
