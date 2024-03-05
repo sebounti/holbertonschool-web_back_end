@@ -26,7 +26,10 @@ users = {
 
 def get_user(user_id):
     """Get a user from database."""
-    return users.get(user_id)
+    if user_id in users:
+        return users.get(user_id)
+    else:
+        return None
 
 
 @app.before_request
