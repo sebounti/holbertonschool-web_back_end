@@ -48,12 +48,14 @@ def get_locale() -> str:
     return request.accept_languages.best_match(Config.LANGUAGES)
 
 
-def get_user(user) -> dict:
+def get_user(user_id) -> dict:
     """
     Get user from request
     """
-    if user and dict(user) in users:
-        return users.get(dict(user))
+    if user_id in users:
+        return users[user_id]
+    else:
+        return None
 
 
 @app.before_request
@@ -61,7 +63,11 @@ def before_request():
     """
     Get user, if any
     """
-    g.user = get_user(request.args.get('login_as'))
+    user_id = request.args.get('login_as')
+    if user_id:
+        user = get_user(int(user_id))
+        if user:
+            g.user = user
 
 
 if __name__ == "__main__":
