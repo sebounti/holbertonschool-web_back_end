@@ -48,12 +48,12 @@ def get_locale() -> str:
     return request.accept_languages.best_match(Config.LANGUAGES)
 
 
-def get_user(user):
+def get_user(user) -> dict:
     """
     Get user from request
     """
-    if user and int(user) in users:
-        return users.get(int(user))
+    if user and dict(user) in users:
+        return users.get(dict(user))
 
 
 @app.before_request
