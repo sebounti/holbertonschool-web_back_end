@@ -56,11 +56,6 @@ class TestGithubOrgClient(unittest.TestCase):
         ({"license": {"key": "my_license"}}, "my_license", True),
         ({"license": {"key": "other_license"}}, "my_license", False)
     ])
-    def test_as_license(repo, license_key, expected):
-        # Assuming GithubOrgClient is initialized with an organization name.
+    def test_has_license(self, repo, license_key, expected):
         client = GithubOrgClient("openai")
-        assert client.has_license(repo, license_key) == expected
-        assert client.has_license.__annotations__['return'] == bool
-        assert client.has_license.__annotations__['repo'] == dict
-        assert client.has_license.__annotations__['license_key'] == str
-        assert client.has_license.__annotations__['expected'] == bool
+        self.assertEqual(client.has_license(repo, license_key), expected)
