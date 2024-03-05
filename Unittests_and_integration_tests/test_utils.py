@@ -39,20 +39,19 @@ class TestGetJson(unittest.TestCase):
         ("http://example.com", {"payload": True}),
         ("http://holberton.io", {"payload": False})
     ])
+    class TestGetJson(unittest.TestCase):
+        """get_json unit tests"""
+    @parameterized.expand([
+        ("http://example.com", {"payload": True}),
+        ("http://holberton.io", {"payload": False})
+    ])
     def test_get_json(self, test_url, test_payload):
-        ''' self descriptive'''
-        # Classe interne Mocked pour simuler la réponse d'une requête HTTP.
-        class Mocked(Mock):
-            ''' mocked class'''
-
-            def json(self):
-                ''' json method mocked'''
-                return test_payload
-
-        # Utili patch pour remplacer l'appel à requests.get par un objet mock.
-        with patch('requests.get') as MockClass:
-            MockClass.return_value = Mocked()
-            self.assertEqual(get_json(test_url), test_payload)
+        """Test that utils.get_json returns the expected result"""
+        with patch('requests.get') as mock_request:
+            mock_request().json.return_value = test_payload
+            mock_request.assert_called_once()
+            response = get_json(test_url)
+            self.assertEqual(response, test_payload)
 
 
 class Testmemoize(unittest.TestCase):
