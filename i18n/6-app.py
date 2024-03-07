@@ -18,7 +18,7 @@ users = {
     4: {"name": "Teletubby", "locale": None, "timezone": "Europe/London"},
 }
 
-
+# babel Configuration settings
 class Config(object):
     """
     app configuration
@@ -39,13 +39,18 @@ def index():
 
 def get_user() -> dict:
     """Retrieve user based on login_as parameter"""
+    # get the login_as parameter from the request
     user_id = request.args.get('login_as')
     try:
+        # convert the login_as parameter to an int
         user_id = int(user_id)
+        # if the user_id exists in the users dictionary
         if user_id in users:
             return users[user_id]
+        # if the user_id does not exist in the users dictionary
     except (ValueError, TypeError):
         pass
+    # if any of the above conditions are not met, return None
     return None
 
 
