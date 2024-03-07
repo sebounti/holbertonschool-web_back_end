@@ -27,7 +27,7 @@ app.config.from_object(Config)
 
 
 @app.route('/', methods=["GET"])
-def hello_world():
+def index():
     """
     Greeting.
 
@@ -37,7 +37,7 @@ def hello_world():
     return render_template('5-index.html')
 
 
-def get_user(user_id) -> dict:
+def get_user() -> dict:
     """
     Get user from request
     """
@@ -56,7 +56,9 @@ def before_request():
     """
     Get user, if any and set it as a global on flask.g.user
     """
-    g.locale = str(get_locale())
+    user = get_user()
+    if user:
+        g.user = user
 
 
 @babel.localeselector
@@ -66,9 +68,10 @@ def get_locale():
     Return:
         Best match to the language.
     """
-    locale = request.args.get('locale')
-    if locale in Config.LANGUAGES:
-        return locale
+    request.locale = request.args.get('locale')
+    if request.locale in Config.LANGUAGES:
+        return request.locale
+
     return request.accept_languages.best_match(Config.LANGUAGES)
 
 
