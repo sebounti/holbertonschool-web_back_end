@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Paramétrer les modèles
+models parameters
 """
 import flask
 from flask import Flask, render_template, g, request
@@ -10,7 +10,7 @@ from flask_babel import Babel
 app = Flask(__name__)
 babel = Babel(app)
 
-# Utilisateurs fictifs
+# fictitious users
 users = {
     1: {"name": "Balou", "locale": "fr", "timezone": "Europe/Paris"},
     2: {"name": "Beyonce", "locale": "en", "timezone": "US/Central"},
@@ -21,7 +21,7 @@ users = {
 
 class Config(object):
     """
-    Configuration de l'application
+    app configuration
     """
     LANGUAGES = ['en', 'fr']
     BABEL_DEFAULT_LOCALE = 'en'
