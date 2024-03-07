@@ -44,6 +44,7 @@ def get_locale() -> str:
     user_locale = request.args.get('locale')
     if user_locale and user_locale in Config.LANGUAGES:
         return user_locale
+
     return request.accept_languages.best_match(Config.LANGUAGES)
 
 
@@ -57,13 +58,9 @@ def get_user() -> dict:
     Returns:
     A dictionary containing user information or None if no valid user is found.
     """
-    user_id = request.args.get('login_as')
-    try:
-        user_id = int(user_id)
-        if user_id in users:
-            return users[user_id]
-    except (ValueError, TypeError):
-        pass
+    user_id = request.args.get("login_as")
+    if user_id:
+        return users.get(int(user_id))
     return None
 
 
