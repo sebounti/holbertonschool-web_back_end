@@ -34,7 +34,7 @@ app.config.from_object(Config)
 @app.route("/", methods=['GET'])
 def index():
     """template """
-    return render_template('6-index.html')
+    return render_template('5-index.html')
 
 
 def get_user() -> dict:
