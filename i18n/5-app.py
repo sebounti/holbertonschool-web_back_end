@@ -32,15 +32,18 @@ class Config:
 app.config.from_object(Config)
 
 
-@app.route('/', methods=["GET"])
-def index() -> str:
+@babel.localeselector
+def get_locale() -> str:
     """
-    Render the initial template with a greeting.
+    Determine the best match for the user's locale.
 
     Returns:
-        Rendered template for the index page.
+        A string representing the best match for the user's preferred language.
     """
-    return render_template('5-index.html')
+    user_locale = request.args.get('locale')
+    if user_locale and user_locale in Config.LANGUAGES:
+        return user_locale
+    return request.accept_languages.best_match(Config.LANGUAGES)
 
 
 def get_user() -> dict:
@@ -51,7 +54,7 @@ def get_user() -> dict:
     user information if found.
 
     Returns:
-        A dictionary containing user information or None if no valid user is found.
+    A dictionary containing user information or None if no valid user is found.
     """
     user_id = request.args.get('login_as')
     try:
@@ -74,18 +77,15 @@ def before_request() -> None:
     g.user = get_user()
 
 
-@babel.localeselector
-def get_locale() -> str:
+@app.route('/', methods=["GET"])
+def index() -> str:
     """
-    Determine the best match for the user's locale.
+    Render the initial template with a greeting.
 
     Returns:
-        A string representing the best match for the user's preferred language.
+        Rendered template for the index page.
     """
-    user_locale = request.args.get('locale')
-    if user_locale and user_locale in Config.LANGUAGES:
-        return user_locale
-    return request.accept_languages.best_match(Config.LANGUAGES)
+    return render_template('5-index.html')
 
 
 if __name__ == "__main__":
