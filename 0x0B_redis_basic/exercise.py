@@ -8,20 +8,13 @@ from functools import wraps
 
 
 def count_calls(method: Callable) -> Callable:
-    ''' Count the number of calls to a method '''
+    ''' Count the number of times a method is called '''
+    name = method.__qualname__
 
-
+    @wraps(method)
     def wrapper(self, *args, **kwargs):
-        if not hasattr(self, '_call_counts'):
-            self._call_counts = {}
-        if method.__qualname__ not in self._call_counts:
-            self._call_counts[method.__qualname__] = 0
-        self._call_counts[method.__qualname__] += 1
-
-        print(f"Method {method.__qualname__} call count: {self._call_counts[method.__qualname__]}")
-
+        self._redis.incr(name)
         return method(self, *args, **kwargs)
-
     return wrapper
 
 
@@ -38,32 +31,28 @@ class Cache:
         self._redis.set(unique_key, data)
         return unique_key
 
-
-    def get(self, key: str, fn: Optional[Callable[[bytes],
-            Union[str, bytes, int, float]]] = None) -> Union[str,
-                                                             bytes, int, float,
-                                                               None]:
+    def get(self, key: str, fn: Callable =
+            None) -> Union[str, bytes, int, float]:
         ''' Get data from Redis using a key and return as bytes
         or apply a function to the result before returning it.'''
-        result = self._redis.get(key)
-        if result is not None and fn is not None:
-            return fn(result)
-        return result
+        key = self._redis.get(key)
+        if fn:
+            return fn(key)
 
+        return key
 
     def get_str(self, key: str) -> Optional[str]:
         ''' Get data from Redis using a key and return as string'''
-        return self.get(key, lambda x: x.decode('utf-8'))
-
+        return self._redis.get(key).decode('utf-8')
 
     def get_int(self, key: str) -> Optional[int]:
         ''' Get data from Redis using a key and return as int'''
-        result = self.get(key)
+        value = self._redis.get(key)
         try:
-            return int(result) if result is not None else None
-        except ValueError:
-            return None
-
+            value = int(value.decode('utf-8'))
+        except Exception:
+            value = 0
+            return value
 
 
 if __name__ == "__main__":
