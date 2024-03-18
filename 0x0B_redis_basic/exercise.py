@@ -4,6 +4,25 @@
 import redis
 import uuid
 from typing import Union, Callable, Optional
+from functools import wraps
+
+
+def count_calls(method: Callable) -> Callable:
+    ''' Count the number of calls to a method '''
+
+
+    def wrapper(self, *args, **kwargs):
+        if not hasattr(self, '_call_counts'):
+            self._call_counts = {}
+        if method.__qualname__ not in self._call_counts:
+            self._call_counts[method.__qualname__] = 0
+        self._call_counts[method.__qualname__] += 1
+
+        print(f"Method {method.__qualname__} call count: {self._call_counts[method.__qualname__]}")
+
+        return method(self, *args, **kwargs)
+
+    return wrapper
 
 
 class Cache:
@@ -12,7 +31,7 @@ class Cache:
         self._redis = redis.Redis(host='localhost', port=6379, db=0)
         self._redis.flushdb()
 
-
+    @count_calls
     def store(self, data: Union[str, bytes, int, float]) -> str:
         ''' Store data in Redis and return a unique key'''
         unique_key = str(uuid.uuid4())
