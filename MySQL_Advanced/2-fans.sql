@@ -1,4 +1,4 @@
---path 2-fans.sql
+-- path 2-fans.sql
 -- make a best band fans
 SELECT origin, SUM(fans) AS nb_fans
 FROM metal_bands
