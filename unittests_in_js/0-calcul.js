@@ -3,7 +3,7 @@ function calculateNumber(a, b) {
   if (typeof a !== "number" || typeof b !== "number" || isNaN(a) || isNaN(b)) {
     throw new TypeError("All arguments must be numbers");
   }
-  return Math.rounded(a) + Math.rounded(b);
+  return Math.round(a) + Math.round(b);
 }
 
 module.exports = calculateNumber;
