@@ -1,7 +1,7 @@
 // test function 0-calcul.js
 
 const assert = require("assert");
-const calculateNumber = require("./0-calcul.js");
+const calculateNumber = require("./0-calcul");
 
 describe("calculateNumber", function () {
   describe("two Integers", function () {
@@ -25,6 +25,22 @@ describe("calculateNumber", function () {
   describe("two float2", function () {
     it("should return 6", function () {
       assert.strictEqual(calculateNumber(1.5, 3.7), 6);
+    });
+  });
+
+  describe("not integer1", function () {
+    it("should throw TypeError if parameters are not numbers", function () {
+      assert.throws(() => {
+        calculateNumber("a", 3);
+      }, TypeError);
+    });
+  });
+
+  describe("not integer2", function () {
+    it("should throw TypeError if parameters are not numbers", function () {
+      assert.throws(() => {
+        calculateNumber(5, "c");
+      }, TypeError);
     });
   });
 });
