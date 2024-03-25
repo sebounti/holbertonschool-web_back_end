@@ -4,10 +4,10 @@
   "description": "unittests_in_js",
   "main": "0-calcul.js",
   "scripts": {
-    "test": "mocha"
+    "test": "test"
   },
   "keywords": [],
-  "author": "",
+  "author": "LENNE Sebastien",
   "license": "ISC",
   "devDependencies": {
     "eslint": "^8.57.0",
