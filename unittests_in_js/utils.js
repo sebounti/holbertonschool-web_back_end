@@ -13,4 +13,4 @@ const Utils = {
     return "invalid operation type";
   },
 };
-module.exports = calculateNumber;
+module.exports = Utils;
