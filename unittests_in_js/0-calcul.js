@@ -4,8 +4,8 @@ function calculateNumber(a, b) {
     throw new TypeError("All arguments must be numbers");
   }
 
-  const rounded_a = Math.round(a);
-  const rounded_b = Math.round(b);
+  let rounded_a = Math.round(a);
+  let rounded_b = Math.round(b);
   return rounded_a + rounded_b;
 }
 
