@@ -4,7 +4,7 @@
   "description": "unittests_in_js",
   "main": "0-calcul.js",
   "scripts": {
-    "test": "test"
+    "test": "mocha"
   },
   "keywords": [],
   "author": "LENNE Sebastien",
