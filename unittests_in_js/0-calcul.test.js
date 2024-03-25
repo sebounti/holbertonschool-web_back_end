@@ -14,7 +14,7 @@ describe("calculateNumber", function () {
     it("should return 5", function () {
       assert.strictEqual(calculateNumber(1, 3.7), 5);
     });
-  }); // Add closing parenthesis here
+  });
 
   describe("two float", function () {
     it("should return 5", function () {
