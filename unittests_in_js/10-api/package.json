@@ -1,0 +1,19 @@
+{
+	"name": "10-api",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"start": "node api.js",
+		"test": "./node_modules/mocha/bin/mocha"
+	},
+	"author": "Lenne sebastien",
+	"license": "ISC",
+	"devDependencies": {
+		"chai": "^4.2.0",
+		"express": "^4.19.2",
+		"mocha": "^10.3.0",
+		"request": "^2.88.0",
+		"sinon": "^7.5.0"
+	}
+}
