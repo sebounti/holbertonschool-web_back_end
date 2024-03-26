@@ -58,10 +58,10 @@ describe("Cart Endpoint", () => {
     });
 
     describe("testing available payments", () => {
-      describe("POST /available_payments", () => {
+      describe("GET /available_payments", () => {
         it("Responds with 200 and correct JSON object when parsed", (done) => {
           const options = {
-            url: "http://localhost:7865/available_payements",
+            url: "http://localhost:7865/available_payments",
             method: "GET",
           };
 
